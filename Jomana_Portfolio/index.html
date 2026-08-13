@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jomana — Creative Technologist</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ivory: #F8F5F0;
+      --white: #FFFDFC;
+      --charcoal: #191817;
+      --rose: #C98F91;
+      --cocoa: #765B52;
+      --sage: #A8B3A0;
+      --line: #DED8D0;
+      --muted: #716C67;
+      --radius: 24px;
+      --shadow: 0 18px 45px rgba(25, 24, 23, .08);
+    }
+    .profile-image {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      padding: 18px 0;
+      background: rgba(248, 245, 240, .82);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(222, 216, 208, .65);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+
+    .logo span { color: var(--rose); }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .nav-links a { transition: color .25s ease; }
+    .nav-links a:hover { color: var(--charcoal); }
+
+    .nav-cta {
+      background: var(--charcoal);
+      color: white !important;
+      padding: 10px 17px;
+      border-radius: 100px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 130px 0 70px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      right: -160px;
+      top: 100px;
+      border-radius: 50%;
+      background: var(--rose);
+      opacity: .16;
+      filter: blur(4px);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--cocoa);
+      font-size: .83rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--sage);
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(168, 179, 160, .18);
+    }
+
+    h1 {
+      font-size: clamp(3.5rem, 8vw, 6.7rem);
+      line-height: .95;
+      letter-spacing: -.075em;
+      max-width: 750px;
+    }
+
+    h1 em {
+      font-family: "Caveat", cursive;
+      font-weight: 600;
+      color: var(--rose);
+      font-style: normal;
+      letter-spacing: -.02em;
+    }
+
+    .hero-copy {
+      margin: 28px 0 34px;
+      max-width: 580px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 14px 20px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: .92rem;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(25,24,23,.12);
+    }
+
+    .btn-dark { background: var(--charcoal); color: white; }
+    .btn-light { border: 1px solid var(--line); background: var(--white); }
+
+    .hero-art {
+      position: relative;
+      height: 460px;
+    }
+
+    .portrait-card {
+      position: absolute;
+      inset: 25px 20px 25px 40px;
+      background: var(--cocoa);
+      border-radius: 38% 38% 28% 28%;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .portrait-card::before {
+      content: "J";
+      position: absolute;
+      right: -10px;
+      bottom: -70px;
+      font-size: 18rem;
+      line-height: 1;
+      color: rgba(255,255,255,.10);
+      font-weight: 700;
+    }
+
+    .portrait-placeholder {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,.9);
+      text-align: center;
+      padding: 40px;
+    }
+
+    .portrait-placeholder div {
+      border: 1px dashed rgba(255,255,255,.45);
+      border-radius: 24px;
+      padding: 25px;
+    }
+
+    .floating {
+      position: absolute;
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 13px 16px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      font-size: .8rem;
+      font-weight: 600;
+    }
+
+    .float-one { top: 5px; right: 0; transform: rotate(5deg); }
+    .float-two { bottom: 10px; left: 0; transform: rotate(-5deg); }
+    .float-three { top: 45%; right: -18px; background: var(--sage); transform: rotate(4deg); }
+
+    /* GENERAL */
+    section { padding: 115px 0; }
+    .section-heading { margin-bottom: 48px; }
+    .section-number {
+      color: var(--rose);
+      font-weight: 700;
+      font-size: .8rem;
+      letter-spacing: .1em;
+    }
+
+    h2 {
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      line-height: 1;
+      letter-spacing: -.06em;
+      margin-top: 9px;
+    }
+
+    .section-intro {
+      max-width: 610px;
+      color: var(--muted);
+      margin-top: 18px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .about-text {
+      font-size: 1.12rem;
+      color: #4f4a46;
+    }
+
+    .about-text p + p { margin-top: 18px; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .info-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 22px;
+      border-radius: var(--radius);
+    }
+
+    .info-card small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 7px;
+      font-size: .75rem;
+    }
+
+    .info-card strong { font-size: .95rem; }
+
+    /* WORK */
+    .filters {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .filter {
+      border: 1px solid var(--line);
+      background: transparent;
+      border-radius: 100px;
+      padding: 9px 15px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: .2s;
+    }
+
+    .filter.active, .filter:hover {
+      background: var(--charcoal);
+      color: white;
+      border-color: var(--charcoal);
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .project {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+    }
+
+    .project.featured {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+    }
+
+    .project-visual {
+      min-height: 270px;
+      padding: 28px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project.featured .project-visual { min-height: 410px; }
+
+    .dressify { background: #E8D5D0; }
+    .lavish { background: #D8CBB0; }
+    .readers { background: #CFCEDC; }
+    .cafe { background: #D9C8B7; }
+    .bank { background: #D4D9D0; }
+    .soul { background: #D7C9CF; }
+    .doorbell { background: #D0D6D9; }
+
+    .project-visual::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 1px solid rgba(25,24,23,.16);
+      right: -60px;
+      top: -70px;
+    }
+
+    .visual-label {
+      position: relative;
+      z-index: 2;
+      font-size: clamp(2rem, 5vw, 4.8rem);
+      line-height: .9;
+      letter-spacing: -.07em;
+      font-weight: 700;
+    }
+
+    /* MEDIA PLACEHOLDER — remove this badge once you drop a real image/video
+       into the .project-visual div (see comments in the HTML below). */
+    .media-slot {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 3;
+      border: 1.5px dashed rgba(25,24,23,.4);
+      background: rgba(255,253,252,.7);
+      backdrop-filter: blur(3px);
+      padding: 6px 12px;
+      border-radius: 100px;
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      letter-spacing: .01em;
+    }
+
+    .project-body { padding: 26px; }
+    .project-body h3 {
+      font-size: 1.55rem;
+      letter-spacing: -.04em;
+    }
+
+    .project-body p {
+      color: var(--muted);
+      margin: 9px 0 18px;
+      font-size: .92rem;
+    }
+
+    .tags {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: var(--ivory);
+      border: 1px solid var(--line);
+      padding: 6px 10px;
+      border-radius: 100px;
+      font-size: .72rem;
+      color: var(--cocoa);
+    }
+
+    /* SKILLS */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 30px;
+      border-radius: var(--radius);
+    }
+
+    .skill-card h3 {
+      margin-bottom: 18px;
+      font-size: 1.2rem;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill {
+      padding: 9px 12px;
+      background: var(--ivory);
+      border-radius: 10px;
+      font-size: .83rem;
+    }
+
+    /* JOURNEY */
+    .timeline {
+      border-left: 1px solid var(--line);
+      margin-left: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 42px 34px;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: 5px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--rose);
+      border: 3px solid var(--ivory);
+      box-sizing: content-box;
+    }
+
+    .timeline-year {
+      font-size: .78rem;
+      color: var(--rose);
+      font-weight: 700;
+    }
+
+    .timeline-item h3 {
+      font-size: 1.25rem;
+      margin: 3px 0;
+    }
+
+    .timeline-item p { color: var(--muted); }
+
+    /* CONTACT */
+    .contact-box {
+      background: var(--charcoal);
+      color: white;
+      border-radius: 35px;
+      padding: 65px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-box::after {
+      content: "✦";
+      position: absolute;
+      right: 50px;
+      top: 25px;
+      color: var(--rose);
+      font-size: 8rem;
+      opacity: .35;
+    }
+
+    .contact-box h2 { max-width: 650px; }
+    .contact-box p {
+      color: #c9c5c0;
+      max-width: 550px;
+      margin: 20px 0 30px;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      border: 1px solid #4a4744;
+      padding: 11px 16px;
+      border-radius: 100px;
+      transition: .2s;
+    }
+
+    .contact-links a:hover {
+      background: var(--rose);
+      border-color: var(--rose);
+      color: var(--charcoal);
+    }
+
+    footer {
+      padding: 35px 0;
+      color: var(--muted);
+      font-size: .8rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 800px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero-grid, .about-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 120px; }
+      .hero-art { height: 380px; }
+      .projects { grid-template-columns: 1fr; }
+      .project.featured {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
+      }
+      .project.featured .project-visual { min-height: 300px; }
+      .skills { grid-template-columns: 1fr; }
+      .contact-box { padding: 38px 28px; }
+    }
+
+    @media (max-width: 500px) {
+      .container { width: min(100% - 28px, 1120px); }
+      section { padding: 80px 0; }
+      .hero-art { height: 330px; }
+      .info-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="logo" href="#home">Jomana<span>.</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#journey">Journey</a>
+        <a class="nav-cta" href="#contact">Let's talk</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow"><span class="dot"></span> UI/UX Designer & Front-End Developer</div>
+          <h1>Hi, I'm <em>Jomana.</em><br> I make ideas<br>feel digital.</h1>
+          <p class="hero-copy">
+            I help turn ideas into professional, user-friendly digital experiences —
+            from mobile app interfaces to responsive websites — combining creativity
+            in UI/UX design with technical skills in front-end web development.
+          </p>
+          <div class="buttons">
+            <a class="btn btn-dark" href="#work">View my work →</a>
+            <a class="btn btn-light" href="#contact">Let's talk</a>
+          </div>
+        </div>
+
+        <div class="hero-art reveal">
+          <div class="portrait-card">
+            <div class="portrait-placeholder">
+              <div class="profile-image">
+  <img src="Images/WhatsApp Image 2026-08-12 at 6.22.23 PM.jpeg" alt="Profile image">
+</div>
+            </div>
+          </div>
+          <div class="floating float-one">UI/UX ✦</div>
+          <div class="floating float-two">Web Developer →</div>
+          <div class="floating float-three">Creative ♡</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="section-number">01 — ABOUT ME</div>
+          <h2>A little bit<br>about me.</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p>
+               I'm a creative designer and developer passionate about combining
+               thoughtful design with technology to create meaningful digital
+               experiences.
+             
+              </p>
+
+               <p>
+                I design website and mobile app interfaces in Figma and develop
+                responsive websites with HTML, CSS, and JavaScript — turning ideas
+                into digital products that are visually appealing, organized, and
+                easy to use.
+                </p>
+
+                <p>
+                 I focus on understanding what users and clients actually need, while
+                 bringing strong organization and leadership to team projects. I enjoy
+                 coordinating tasks, solving problems, and making sure the final
+                 result stays consistent from start to finish.
+                </p>
+          </div>
+
+          <div class="info-grid reveal">
+            <div class="info-card"><small>EDUCATION</small><strong>Informatics & Computer Science, BUE</strong></div>
+            <div class="info-card"><small>FOCUS</small><strong>UI/UX Design + Front-End Dev</strong></div>
+            <div class="info-card"><small>TOOLS</small><strong>Figma · Java · HTML/CSS/JS</strong></div>
+            <div class="info-card"><small>FUN FACT</small><strong>Former volleyball player 🏐</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="section-number">02 — SELECTED WORK</div>
+          <h2>Things I've<br>been creating.</h2>
+          <p class="section-intro">
+            A mix of UX, web development, software, and creative projects.
+          </p>
+        </div>
+
+        <div class="filters reveal">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="design">UI/UX</button>
+          <button class="filter" data-filter="web">Web</button>
+        
+        </div>
+
+        <div class="projects">
+          <!-- PLACEHOLDER: swap the .project-visual dressify div's contents for an
+               <img src="Images/your-file.jpg" alt="Dressify"> or <video> tag, then delete
+               the .media-slot badge below. -->
+          <article class="project featured reveal" data-category="web">
+            <div class="project-visual lavish">
+              <img src="Images/Screenshot 2026-08-13 123013.png" alt="Lavish Horizons" style="width: 100%; height: 100%; object-fit: contain; display: block;">
+            </div>
+            <div class="project-body">
+              <h3>Lavish Horizons</h3>
+              <p>A university front-end project — a website for a fictional travel agency, built to be structured, responsive, and visually appealing.</p>
+              <div class="tags"><span class="tag">Web</span><span class="tag">HTML/CSS</span><span class="tag">Responsive Design</span></div>
+            </div>
+          </article>
+
+      
+          <article class="project reveal" data-category="ui/ux">
+            <div class="project-visual dressify">
+              <video width="100%" height="100%" muted controls>
+                <source src="Images/Dressify.mp4" alt="Dressify" type="video/mp4">
+              </video>
+            </div>
+            
+<div class="project-body">
+              <h3>Dressify</h3>
+              <p>
+                AI-powered wardrobe and styling app that helps users organize their
+                clothes and get personalized outfit recommendations based on weather,
+                occasion, and personal preferences. I led the team as Team Leader &
+                UI/UX Designer — from research and information architecture through
+                wireframes to a full interactive Figma prototype.
+                <span link="https://www.figma.com/proto/xfQNrtEMHRdKWWxZzXccCx/Dressify-Group-2?team_id=1564988821421720042&node-id=627-4798&page-id=627%3A3889&starting-point-node-id=627%3A4798&t=mLfRc1JcT8THE9XM-1" target="_blank"><ul>View the full prototype →</ul></span>
+              </p>
+              <div class="tags">
+                <span class="tag">Team Leadership</span>
+                <span class="tag">UX Research</span>
+                <span class="tag">Figma</span>
+                <span class="tag">UI Design</span>
+                <span class="tag">Prototyping</span>
+                <span class="tag">User Testing</span>
+                <span class="tag">Mobile App</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- PLACEHOLDER: add your real image/video for ReadersNook here. -->
+            <article class="project reveal" data-category="ui/ux">
+           <div class="project-visual readers">
+              <video width="100%" height="100%" muted controls>
+                <source src="Images/ReadersNook.mp4" alt="ReadersNook" type="video/mp4">
+              </video>
+            </div>
+            <div class="project-body">
+              <h3>ReadersNook</h3>
+              <p>A reading & community mobile app concept bringing books, manga, manhwa, and fanfiction into one platform, with a built-in reader community for socializing and sharing interests.
+                <span link="https://www.figma.com/proto/8PvL3hnGzFNiFfoBn87Z4Z/ReadersNook_Jomana?page-id=1%3A2&node-id=6-68&p=f&viewport=235%2C142%2C0.09&t=HquVIPbxQoJx4G6B-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=36%3A100" target="_blank"><ul>View the full prototype →</ul></span>
+              </p>
+              <div class="tags">
+                <span class="tag">UX Research</span>
+                <span class="tag">Figma</span>
+                <span class="tag">UI Design</span>
+                <span class="tag">Prototyping</span>
+                <span class="tag">User Testing</span>
+                <span class="tag">Mobile App</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="section-number">03 — SKILLS</div>
+          <h2>What I<br>work with.</h2>
+        </div>
+
+        <div class="skills">
+          <div class="skill-card reveal">
+            <h3>✦ Design</h3>
+            <div class="skill-list">
+              <span class="skill">Figma</span><span class="skill">UI Design</span>
+              <span class="skill">UX Research</span><span class="skill">Wireframing</span>
+              <span class="skill">Prototyping</span><span class="skill">Usability Testing</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal">
+            <h3>⌁ Development</h3>
+            <div class="skill-list">
+              <span class="skill">HTML</span><span class="skill">CSS</span>
+              <span class="skill">JavaScript</span>
+              <span class="skill">Java</span><span class="skill">C++</span><span class="skill">Java GUI</span>
+              <span class="skill">Responsive Web</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal">
+            <h3>⌁ Technology</h3>
+            <div class="skill-list">
+              <span class="skill">ESP32</span><span class="skill">Embedded Systems</span>
+              <span class="skill">Databases</span><span class="skill">Data Structures</span>
+              <span class="skill">Algorithms</span><span class="skill">OOP</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal">
+            <h3>♡ Creative & Leadership</h3>
+            <div class="skill-list">
+              <span class="skill">Team Leadership</span>
+              <span class="skill">Digital Marketing</span><span class="skill">Time Management</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="container">
+  <div class="section-heading reveal">
+    <div class="section-number">04 — MY JOURNEY</div>
+    <h2>Still learning.<br>Still creating.</h2>
+  </div>
+
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="timeline-year">NOW</div>
+      <h3>Creating My Next Chapter ✦</h3>
+      <p>
+        Continuing to build my portfolio, develop freelance web projects,
+        explore UI/UX, and learn game design while looking for opportunities
+        to turn creative ideas into real digital products.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2026</div>
+      <h3>Building Bigger Things</h3>
+      <p>
+        Led the Dressify UI/UX case study during my NTI internship, built the
+        KidZania and Bank Management Java systems, developed a Smart Doorbell
+        hardware project, and started developing freelance web work.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <h3>Design & Digital Projects</h3>
+      <p>
+        Ranked Top 20 in my class, designed a mobile app prototype in Figma,
+        built a frontend HTML/CSS website, earned a Digital Marketing
+        certification, and supported event logistics at SKATCH.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2024</div>
+      <h3>Started at BUE</h3>
+      <p>
+        Began my BSc in Information and Computer Science at The British
+        University in Egypt.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <h3>Resala Charity Organization</h3>
+      <p>
+        Helped manage social media posts for charity trips and worked with
+        a team to reach fundraising goals.
+      </p>
+    </div>
+
+  </div>
+</div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box reveal">
+          <div class="section-number">05 — LET'S CONNECT</div>
+          <h2>Have an idea?<br>Let's make it real.</h2>
+          <p>
+            I'm always interested in creative projects, collaborations,
+            freelance opportunities, and people building cool things.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:Jomanakandil30@gmail.com">Email ↗</a>
+            <a href="https://www.linkedin.com/in/jomanakandil/" target="_blank">LinkedIn ↗</a>
+            <a href="https://github.com/jomana-ahmed" target="_blank">GitHub ↗</a>
+            <a href="https://www.behance.net/JomanaKandill" target="_blank">Behance ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <span>Jomana Kandil © 2026</span>
+    <span>Designed & built with love andintention ✦</span>
+  </footer>
+
+  <script>
+    // Project filters
+    const filters = document.querySelectorAll(".filter");
+    const projects = document.querySelectorAll(".project");
+
+    filters.forEach(filter => {
+      filter.addEventListener("click", () => {
+        filters.forEach(f => f.classList.remove("active"));
+        filter.classList.add("active");
+
+        const selected = filter.dataset.filter;
+
+        projects.forEach(project => {
+          const match = selected === "all" || project.dataset.category === selected;
+          project.style.display = match ? "" : "none";
+        });
+      });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
